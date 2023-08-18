@@ -1,6 +1,6 @@
 {
   "name": "stimulus-decorators",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "[FORK] TypeScript decorators for the Stimulus framework",
   "keywords": [
     "stimulus",
