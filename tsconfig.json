@@ -10,9 +10,9 @@
     "experimentalDecorators": true,
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "typeRoots": ["./node_modules/@types"],
-    "outDir": "dist/",
-    "rootDir": "src/"
+    "outDir": "./dist/",
+    "rootDir": "./src/"
   },
-  "exclude": ["dist"],
-  "include": ["./src/**/*.ts"]
+  "exclude": ["dist", "src/**/*.test.ts"],
+  "include": ["src/**/*.ts"]
 }

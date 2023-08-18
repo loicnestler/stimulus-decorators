@@ -16,10 +16,6 @@
   },
   "type": "module",
   "source": "src/index.ts",
-  "exports": {
-    "require": "./dist/index.cjs",
-    "default": "./dist/index.modern.js"
-  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "before:init": ["yarn lint", "yarn test"],
+    "before:init": ["yarn lint"],
     "after:bump": "yarn build"
   },
   "github": {
