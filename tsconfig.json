@@ -5,10 +5,14 @@
     "strict": true,
     "importHelpers": true,
     "moduleResolution": "node",
+    "declaration": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-    "typeRoots": ["./node_modules/@types"]
+    "typeRoots": ["./node_modules/@types"],
+    "outDir": "dist/",
+    "rootDir": "src/"
   },
-  "exclude": ["dist"]
+  "exclude": ["dist"],
+  "include": ["./src/**/*.ts"]
 }
