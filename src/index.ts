@@ -4,3 +4,5 @@ export * from './decorators/classes';
 export * from './decorators/target';
 export * from './decorators/targets';
 export * from './decorators/value';
+export * from './decorators/outlet';
+export * from './decorators/outlets';
