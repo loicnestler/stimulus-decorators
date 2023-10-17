@@ -12,13 +12,13 @@ Stimulus Decorators is a TypeScript library that extends the [Stimulus](https://
 If you use Yarn package manager.
 
 ```bash
-yarn add @vytant/stimulus-decorators
+yarn add stimulus-decorators
 ```
 
 If you use npm package manager.
 
 ```bash
-npm install --save @vytant/stimulus-decorators
+npm install --save stimulus-decorators
 ```
 
 ## Usage
@@ -30,6 +30,8 @@ There are several decorators:
 - [`@Value`](#value_decorator)
 - [`@Class`](#class_decorator)
 - [`@Classes`](#classes_decorator)
+- [`@Outlet`](#outlet_decorator)
+- [`@Outlets`](#outlets_decorator)
 - [`@TypedController`](#typed_controller_decorator)
 
 ### <a name="target_decorator"></a> `@Target` decorator
@@ -39,7 +41,7 @@ Explicitly define target properties with types using the `@Target` decorator, an
 ```ts
 // hello_controller.ts
 import { Controller } from '@hotwired/stimulus';
-import { Target, TypedController } from '@vytant/stimulus-decorators';
+import { Target, TypedController } from 'stimulus-decorators';
 
 @TypedController
 export default class extends Controller {
@@ -74,7 +76,7 @@ To get an array of all matching targets in scope, use the `@Targets` decorator.
 ```ts
 // slider_controller.ts
 import { Controller } from '@hotwired/stimulus';
-import { Targets, TypedController } from '@vytant/stimulus-decorators';
+import { Targets, TypedController } from 'stimulus-decorators';
 
 @TypedController
 export default class extends Controller {
@@ -112,7 +114,7 @@ Explicitly define value properties with types and default values using the `@Val
 ```ts
 // loader_controller.ts
 import { Controller } from '@hotwired/stimulus';
-import { Value, TypedController } from '@vytant/stimulus-decorators';
+import { Value, TypedController } from 'stimulus-decorators';
 
 @TypedController
 export default class extends Controller {
@@ -146,13 +148,13 @@ export default class extends Controller {
 #### If you'd like to set the `type` of each value from its type definition, you must use [reflect-metadata](https://github.com/rbuckton/reflect-metadata).
 
 1. Set `"emitDecoratorMetadata": true` in your `tsconfig.json`.
-2. Import `reflect-metadata` **before** importing `@vytant/stimulus-decorators` (importing `reflect-metadata` is needed just once).
+2. Import `reflect-metadata` **before** importing `stimulus-decorators` (importing `reflect-metadata` is needed just once).
 
 ```ts
 // loader_controller.ts
 import 'reflect-metadata';
 import { Controller } from '@hotwired/stimulus';
-import { Value, TypedController } from '@vytant/stimulus-decorators';
+import { Value, TypedController } from 'stimulus-decorators';
 
 @TypedController
 export default class extends Controller {
@@ -172,7 +174,7 @@ Explicitly define CSS class properties with types using the `@Class` decorator, 
 ```ts
 // search_controller.ts
 import { Controller } from '@hotwired/stimulus';
-import { Class, TypedController } from '@vytant/stimulus-decorators';
+import { Class, TypedController } from 'stimulus-decorators';
 
 @TypedController
 export default class extends Controller {
@@ -210,7 +212,7 @@ To get an array of classes in the corresponding CSS class attribute, use the `@C
 ```ts
 // search_controller.ts
 import { Controller } from '@hotwired/stimulus';
-import { Classes, TypedController } from '@vytant/stimulus-decorators';
+import { Classes, TypedController } from 'stimulus-decorators';
 
 @TypedController
 export default class extends Controller {
@@ -241,6 +243,74 @@ export default class extends Controller {
 }
 ```
 
+### <a name="outlet_decorator"></a> `@Outlet` decorator
+
+Explicitly define CSS outlet properties with types using the `@Outlet` decorator, and it will automatically add them to the `static outlets` array for your Stimulus controller.
+
+```ts
+import { Controller } from '@hotwired/stimulus';
+import { Outlet, TypedController } from 'stimulus-decorators';
+
+@TypedController
+export default class extends Controller {
+  @Outlet exampleOutlet!: Controller;
+
+  loadResults() {
+    console.log(this.exampleOutlet.element);
+  }
+}
+```
+
+Equivalent to:
+
+```js
+import { Controller } from '@hotwired/stimulus';
+
+export default class extends Controller {
+  static outlets = ['example'];
+
+  loadResults() {
+    console.log(this.exampleOutlet.element);
+  }
+}
+```
+
+### <a name="outlets_decorator"></a> `@Outlets` decorator
+
+To get an array of outlets in the corresponding CSS class attribute, use the `@Outlets` decorator.
+
+```ts
+import { Controller } from '@hotwired/stimulus';
+import { Outlets, TypedController } from 'stimulus-decorators';
+
+@TypedController
+export default class extends Controller {
+  @Outlets exampleOutlets!: Controller[];
+
+  loadResults() {
+    for (const outlet of this.exampleOutlets) {
+      console.log(outlet.element);
+    }
+  }
+}
+```
+
+Equivalent to:
+
+```js
+import { Controller } from '@hotwired/stimulus';
+
+export default class extends Controller {
+  static outlets = ['example'];
+
+  loadResults() {
+    for (const outlet of this.exampleOutlets) {
+      console.log(outlet.element);
+    }
+  }
+}
+```
+
 ### <a name="typed_controller_decorator"></a> `@TypedController` decorator
 
 It is required to use the `@TypedController` decorator on every Stimulus controller where you use `@Target`, `@Targets`, or `@Value` decorators.
@@ -248,7 +318,7 @@ It is required to use the `@TypedController` decorator on every Stimulus control
 ```ts
 // controller.ts
 import { Controller } from '@hotwired/stimulus';
-import { TypedController } from '@vytant/stimulus-decorators';
+import { TypedController } from 'stimulus-decorators';
 
 @TypedController
 export default class extends Controller {
